@@ -22,18 +22,25 @@
 //***************************** Local Variables ******************************** 
  
 //****************************** Local Functions ******************************* 
+static bool ChangeToLower(uint8_t *pucStringName);
+static bool ChangeToUpper(uint8_t *pucStringName);
+static bool ChangeToCamel(uint8_t *pucStringName);
 
 //******************************.ChangeToLower.*********************************
 //Purpose : To convert to lower case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for both input success return will be 1 else 0
+//Outputs : pucStringName - updated string after conversion
+//Return  : Boolean value - for both input success return will be true else 
+//          false
 //Notes   : None
 //*
-bool ChangeToLower(uint8_t *pucStringName)
+static bool ChangeToLower(uint8_t *pucStringName)
 {
+    bool ChangeLowerRet = true;
+
     if(pucStringName == NULL)
     {
-        return false;
+        ChangeLowerRet = false;
     }
     
     while (*pucStringName)
@@ -46,20 +53,24 @@ bool ChangeToLower(uint8_t *pucStringName)
         pucStringName++;
     }
 
-    return true;
+    return ChangeLowerRet;
 }
 
 //******************************.ChangeToUpper.********************************* 
 //Purpose : To convert to upper case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for both input success return will be 1 else 0
+//Outputs : pucStringName - updated string after conversion
+//Return  : Boolean value - for both input success return will be true else 
+//          false
 //Notes   : None
 //*
-bool ChangeToUpper(uint8_t *pucStringName)
+static bool ChangeToUpper(uint8_t *pucStringName)
 {
+    bool ChangeUpperRet = true;
+
     if(pucStringName == NULL)
     {
-        return false;
+        ChangeUpperRet = false;
     }
     
     while (*pucStringName)
@@ -71,29 +82,32 @@ bool ChangeToUpper(uint8_t *pucStringName)
         pucStringName++;
     }
 
-    return true;
+    return ChangeUpperRet;
 }
 
 //******************************.ChangeToCamel.********************************* 
 //Purpose : To convert to camel case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for both input success return will be 1 else 0
+//Outputs : pucStringName - updated string after conversion
+//Return  : Boolean value - for both input success return will be true else 
+//          false
 //Notes   : None
 //*
-bool ChangeToCamel(uint8_t *pucStringName)
+static bool ChangeToCamel(uint8_t *pucStringName)
 {
-    uint8_t ChangeCaseNewWord = 1;
+    bool ChangeCaseNewWord = true;
+    bool ChangeCamelRet = true;
 
     if(pucStringName == NULL)
     {
-        return false;
+        ChangeCamelRet = false;
     }
 
     while(*pucStringName)
     {
         if(*pucStringName == ' ')
         {
-            ChangeCaseNewWord = 1;
+            ChangeCaseNewWord = true;
         }
         else
         {
@@ -103,7 +117,7 @@ bool ChangeToCamel(uint8_t *pucStringName)
                 { 
                     *pucStringName = *pucStringName - ('a' - 'A');
                 } 
-                ChangeCaseNewWord = 0;
+                ChangeCaseNewWord = false;
             }
             else
             {
@@ -117,51 +131,66 @@ bool ChangeToCamel(uint8_t *pucStringName)
         pucStringName++;  
     }
     
-    return true;
+    return ChangeCamelRet;
 }
 
 //******************************.ChangeCase.************************************
 //Purpose : To change the case conversion.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
 //          pucUserChoice - Interger pointer to get choice from user
-//Return  : Boolean value - for both input success return will be 1 else 0
+//Outputs : pucStringName - updated string after conversion
+//Return  : Boolean value - for both input success return will be true else 
+//          false
 //Notes   : None
 //*
-bool ChangeCase(uint8_t *pucStringName, CASE_TYPE *pucUserChoice)
+bool ChangeCase(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 {
+    bool ChangeCaseRet = true;
+
     if(pucStringName == NULL || pucUserChoice == NULL)
     {
         printf("pointer is NULL\n");
-        return false;
+        ChangeCaseRet = false;
     }
     else
     {
         switch(*pucUserChoice)
         {
             case CHANGE_CASE_LOWER:
+            {
                 if(ChangeToLower(pucStringName) != true)
                 {
-                    return false;
+                    ChangeCaseRet = false;
                 }
                 break;
+            }
+
             case CHANGE_CASE_UPPER:
+            {
                 if(ChangeToUpper(pucStringName) != true)
                 {
-                    return false;
+                    ChangeCaseRet = false;
                 }
                 break;
+            }
+
             case CHANGE_CASE_CAMEL:
+            {
                 if(ChangeToCamel(pucStringName) != true)
                 {
-                    return false;
+                    ChangeCaseRet = false;
                 }
                 break;
+            }
+
             default:
+            {
                 printf("Invalid user choice\n");
                 break;
+            }
         }
     }
 
-    return true;
+    return ChangeCaseRet;
 }
 //EOF

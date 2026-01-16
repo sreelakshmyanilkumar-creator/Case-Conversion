@@ -25,21 +25,23 @@
  
 //****************************** Local Functions ******************************* 
 
-//******************************.main.********************************* 
+//******************************.main.****************************************** 
 //Purpose : main function.
 //Inputs  : None
+//Outputs : None
 //Return  : Interger value - Upon success return will be 0 else any non zero
 //Notes   : None
 //*
 int main()
 {
     uint8_t pucStringName[READ_INPUT_STRING_SIZE] = {0};
-    CASE_TYPE pucUserChoice = 0;
+    CHANGE_CASE_TYPE pucUserChoice = 0;
+    bool MainRet = EXIT_SUCCESS;
 
     if(ReadUserInput(pucStringName, &pucUserChoice) == false)
     {
         printf("Invalid read input from user\n");
-        return EXIT_FAILURE;
+        MainRet = EXIT_FAILURE;
     }
     else
     {
@@ -51,7 +53,7 @@ int main()
         if(ChangeCase(pucStringName, &pucUserChoice) != true)
         {
             printf("Invalid case conversion\n");
-            return EXIT_FAILURE;
+            MainRet = EXIT_FAILURE;
         }
         else
         {
@@ -61,6 +63,6 @@ int main()
         }
     }
 
-    return EXIT_SUCCESS;
+    return MainRet;
 }
 // EOF 

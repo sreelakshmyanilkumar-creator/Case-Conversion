@@ -27,14 +27,11 @@ typedef enum {
     CHANGE_CASE_LOWER = 1,
     CHANGE_CASE_UPPER,
     CHANGE_CASE_CAMEL
- }CASE_TYPE;
+ }CHANGE_CASE_TYPE;
 //***************************** Global Variables ******************************* 
  
 //**************************** Forward Declarations **************************** 
-bool ChangeCase(uint8_t *pucStringName, CASE_TYPE *pucUserChoice);
-bool ChangeToLower(uint8_t *pucStringName);
-bool ChangeToUpper(uint8_t *pucStringName);
-bool ChangeToCamel(uint8_t *pucStringName);
+bool ChangeCase(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice);
 
 #endif //_CHANGE_CASE_H_
 //EOF

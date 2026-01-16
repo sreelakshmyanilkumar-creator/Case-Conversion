@@ -33,7 +33,7 @@
 //***************************** Global Variables ******************************* 
  
 //**************************** Forward Declarations **************************** 
-bool ReadUserInput(uint8_t *pucStringName, CASE_TYPE *pucUserChoice);
+bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice);
 
 #endif //_READ_USER_INPUT_H_
 //EOF

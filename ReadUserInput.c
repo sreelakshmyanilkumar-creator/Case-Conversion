@@ -15,22 +15,33 @@
 //******************************* Include Files ******************************** 
  #include "ReadUserInput.h"
 
+//******************************* Local Types ********************************** 
+ 
+//***************************** Local Constants ******************************** 
+
+//***************************** Local Variables ******************************** 
+ 
+//****************************** Local Functions ******************************* 
+
 //******************************.ReadUserInput.*********************************
 //Purpose : To get the user input like string and conversion type.
-//Inputs  : pucStringName - Character Pointer to get the input string from 
-//          user
+//Inputs  : pucStringName - Character Pointer to get the input string from user
 //          pucUserChoice - Interger pointer to get choice of conversion from 
 //          user
+//Outputs : pucStringName - updated string after read input from user
+//          pucUserChoice - Updated integer after read input from user
 //Return  : Boolean value - for both input success return will be 1 else 0
 //Notes   : None
 //******************************************************************************
 
-bool ReadUserInput(uint8_t *pucStringName, CASE_TYPE *pucUserChoice)
+bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 {
+    bool ReadInputRet = true;
+
     if(pucStringName == NULL || pucUserChoice == NULL)
     {
         printf("Pointer is NULL\n");
-        return false;
+        ReadInputRet = false;
     }
     else
     {
@@ -38,7 +49,7 @@ bool ReadUserInput(uint8_t *pucStringName, CASE_TYPE *pucUserChoice)
 
         if(fgets((char*)pucStringName, READ_INPUT_STRING_SIZE,stdin) == NULL)
         {
-            return false;
+            ReadInputRet = false;
         }
 
         printf("Enter the user choice of conversion\n");
@@ -49,10 +60,10 @@ bool ReadUserInput(uint8_t *pucStringName, CASE_TYPE *pucUserChoice)
         if(scanf("%u", pucUserChoice) != true)
         {
             printf("USER INPUTT = %hhd\n", *pucUserChoice);
-            return false;
+            ReadInputRet = false;
         }
     }
 
-    return true;
+    return ReadInputRet;
 }
 //EOF
