@@ -26,7 +26,7 @@
 //******************************.ChangeToLower.*********************************
 //Purpose : To convert to lower case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for success return will be 0 & for any failure return will be -1
+//Return  : Boolean value - for both input success return will be 1 else 0
 //Notes   : None
 //*
 bool ChangeToLower(uint8_t *pucStringName)
@@ -49,11 +49,11 @@ bool ChangeToLower(uint8_t *pucStringName)
     return true;
 }
 
-//******************************.ChangeToUpper.******************************************************************* 
+//******************************.ChangeToUpper.********************************* 
 //Purpose : To convert to upper case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for success return will be 0 & for any failure return will be -1
-//Notes   :  None
+//Return  : Boolean value - for both input success return will be 1 else 0
+//Notes   : None
 //*
 bool ChangeToUpper(uint8_t *pucStringName)
 {
@@ -74,10 +74,10 @@ bool ChangeToUpper(uint8_t *pucStringName)
     return true;
 }
 
-//******************************.ChangeToCamel.******************************************************************** 
+//******************************.ChangeToCamel.********************************* 
 //Purpose : To convert to camel case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
-//Return  : Boolean value - for success return will be 0 & for any failure return will be -1
+//Return  : Boolean value - for both input success return will be 1 else 0
 //Notes   : None
 //*
 bool ChangeToCamel(uint8_t *pucStringName)
@@ -120,12 +120,12 @@ bool ChangeToCamel(uint8_t *pucStringName)
     return true;
 }
 
-//******************************.ChangeCase.***********************************************************************
+//******************************.ChangeCase.************************************
 //Purpose : To change the case conversion.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
 //          pucUserChoice - Interger pointer to get choice from user
-//Return  : Boolean value - for success return will be 0 & for any failure return will be -1
-//Notes   :  
+//Return  : Boolean value - for both input success return will be 1 else 0
+//Notes   : None
 //*
 bool ChangeCase(uint8_t *pucStringName, CASE_TYPE *pucUserChoice)
 {

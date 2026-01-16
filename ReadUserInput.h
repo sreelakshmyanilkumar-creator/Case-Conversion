@@ -22,12 +22,16 @@
 #include <string.h>
 #include "ChangeCase.h"
 
-//******************************* Global Constants *****************************
+//******************************* Global Types ********************************* 
+ 
+//***************************** Global Constants ******************************* 
 #define READ_INPUT_STRING_SIZE (20)
 #define TRUE                   (1)
 #define FALSE                  (0)
 #define SCANF_TRUE             (2)
 
+//***************************** Global Variables ******************************* 
+ 
 //**************************** Forward Declarations **************************** 
 bool ReadUserInput(uint8_t *pucStringName, CASE_TYPE *pucUserChoice);
 

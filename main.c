@@ -1,60 +1,66 @@
-//**************************** Case Conversion****************************** 
+//**************************** Case Conversion ********************************* 
 //  Copyright (c) 2026 Trenser Technology Solutions 
 //  All Rights Reserved 
-//***************************************************************************** 
+//******************************************************************************
 // 
 // File        : main.c
 // Summary     : Case conversion of a string according to user input
-// Note        : 
-// Author      : Sreelakshmy M A
+// Note        : None
+// Author      : Sreelakshmy M.A.
 // Date        : 15/01/2026
 // 
-//***************************************************************************** 
+//******************************************************************************
  
+//******************************* Include Files ********************************
+#include <stdlib.h>
+#include "ReadUserInput.h"
+#include "ChangeCase.h"
 
-//******************************* Include Files ******************************* 
- #include <stdio.h>
- #include <stdint.h>
- #include <string.h>
- #include "read_user_input.h"
- #include "change_case.h"
+//******************************* Local Types ********************************** 
  
-//***************************** Global Variables ******************************* 
-uint8_t ucStringName[20];
-uint8_t ucUserChoice;
+//***************************** Local Constants ******************************** 
+ #define DEBUG_PRINTS
 
+//***************************** Local Variables ******************************** 
+ 
+//****************************** Local Functions ******************************* 
 
-//***************************** Local types ******************************* 
-#define DEBUG_PRINTS
-
-
+//******************************.main.********************************* 
+//Purpose : main function.
+//Inputs  : None
+//Return  : Interger value - Upon success return will be 0 else any non zero
+//Notes   : None
+//*
 int main()
 {
-    if(ReadUserInput(ucStringName,&ucUserChoice) == FALSE)
+    uint8_t pucStringName[READ_INPUT_STRING_SIZE] = {0};
+    CASE_TYPE pucUserChoice = 0;
+
+    if(ReadUserInput(pucStringName, &pucUserChoice) == false)
     {
         printf("Invalid read input from user\n");
+        return EXIT_FAILURE;
     }
     else
     {
         #ifdef DEBUG_PRINTS
-        printf("%s\n",ucStringName);
-        printf("%d\n",ucUserChoice);
+        printf("%s\n", pucStringName);
+        printf("%d\n", pucUserChoice);
         #endif
 
-        if(ChangeCase(ucStringName,&ucUserChoice) != TRUE)
+        if(ChangeCase(pucStringName, &pucUserChoice) != true)
         {
             printf("Invalid case conversion\n");
+            return EXIT_FAILURE;
         }
         else
         {
             #ifdef DEBUG_PRINTS
-            printf("%s\n",ucStringName);
+            printf("%s\n", pucStringName);
             #endif
         }
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
-
-
 // EOF 

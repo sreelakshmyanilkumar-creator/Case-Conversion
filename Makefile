@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c11
 TARGET = main
 
 # Source files
-SRCS = main.c read_user_input.c change_case.c
+SRCS = main.c ReadUserInput.c ChangeCase.c
 OBJS = $(SRCS:.c=.o)
 
 # Default rule
@@ -17,7 +17,7 @@ $(TARGET) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 #compile each .c into .o
-%.o: %.c read_user_input.h change_case.h
+%.o: %.c ReadUserInput.h ChangeCase.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean up
