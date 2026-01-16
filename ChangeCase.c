@@ -2,29 +2,34 @@
 //  Copyright (c) 2026 Trenser Technology Solutions 
 //  All Rights Reserved 
 //******************************************************************************
-// 
+//
 // File        : ChangeCase.c
 // Summary     : To change case of the string as per user input
 // Note        : None
 // Author      : Sreelakshmy M.A.
 // Date        : 15/01/2026
-// 
-//****************************************************************************** 
+//
+//******************************************************************************
 
 //******************************* Include Files ********************************
  #include "ChangeCase.h"
  #include "ReadUserInput.h"
 
-//******************************* Local Types ********************************** 
- 
-//***************************** Local Constants ******************************** 
+//******************************* Local Types **********************************
 
-//***************************** Local Variables ******************************** 
- 
-//****************************** Local Functions ******************************* 
+//***************************** Local Constants ********************************
+
+//****************************** Local Functions *******************************
 static bool ChangeToLower(uint8_t *pucStringName);
 static bool ChangeToUpper(uint8_t *pucStringName);
 static bool ChangeToCamel(uint8_t *pucStringName);
+
+//***************************** Local Variables ********************************
+ CHANGE_CASE_HANDLER CaseHandler[] = {
+    {CHANGE_CASE_LOWER, ChangeToLower},
+    {CHANGE_CASE_UPPER, ChangeToUpper},
+    {CHANGE_CASE_CAMEL, ChangeToCamel}
+ };
 
 //******************************.ChangeToLower.*********************************
 //Purpose : To convert to lower case.
@@ -56,7 +61,7 @@ static bool ChangeToLower(uint8_t *pucStringName)
     return ChangeLowerRet;
 }
 
-//******************************.ChangeToUpper.********************************* 
+//******************************.ChangeToUpper.*********************************
 //Purpose : To convert to upper case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
 //Outputs : pucStringName - updated string after conversion
@@ -85,7 +90,7 @@ static bool ChangeToUpper(uint8_t *pucStringName)
     return ChangeUpperRet;
 }
 
-//******************************.ChangeToCamel.********************************* 
+//******************************.ChangeToCamel.*********************************
 //Purpose : To convert to camel case.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
 //Outputs : pucStringName - updated string after conversion
@@ -146,6 +151,7 @@ static bool ChangeToCamel(uint8_t *pucStringName)
 bool ChangeCase(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 {
     bool ChangeCaseRet = true;
+    uint8_t ChangeCaseMaxCount = sizeof(CaseHandler)/sizeof(CaseHandler[0]);
 
     if(pucStringName == NULL || pucUserChoice == NULL)
     {
@@ -154,39 +160,11 @@ bool ChangeCase(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
     }
     else
     {
-        switch(*pucUserChoice)
+        for(int count = 0; count < ChangeCaseMaxCount; count++)
         {
-            case CHANGE_CASE_LOWER:
+            if(CaseHandler[count].ChangeCaseType == *pucUserChoice)
             {
-                if(ChangeToLower(pucStringName) != true)
-                {
-                    ChangeCaseRet = false;
-                }
-                break;
-            }
-
-            case CHANGE_CASE_UPPER:
-            {
-                if(ChangeToUpper(pucStringName) != true)
-                {
-                    ChangeCaseRet = false;
-                }
-                break;
-            }
-
-            case CHANGE_CASE_CAMEL:
-            {
-                if(ChangeToCamel(pucStringName) != true)
-                {
-                    ChangeCaseRet = false;
-                }
-                break;
-            }
-
-            default:
-            {
-                printf("Invalid user choice\n");
-                break;
+                ChangeCaseRet = CaseHandler[count].func(pucStringName);
             }
         }
     }

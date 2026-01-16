@@ -1,31 +1,31 @@
-//**************************** Case Conversion ********************************* 
+//**************************** Case Conversion *********************************
 //  Copyright (c) 2026 Trenser Technology Solutions 
 //  All Rights Reserved 
 //******************************************************************************
-// 
-// File        : main.c
-// Summary     : Case conversion of a string according to user input
-// Note        : None
-// Author      : Sreelakshmy M.A.
-// Date        : 15/01/2026
-// 
+//
+// File     : main.c
+// Summary  : Case conversion of a user given string according to user input
+// Note     : None
+// Author   : Sreelakshmy M.A.
+// Date     : 15/01/2026
+//
 //******************************************************************************
- 
+
 //******************************* Include Files ********************************
 #include <stdlib.h>
 #include "ReadUserInput.h"
 #include "ChangeCase.h"
 
-//******************************* Local Types ********************************** 
- 
-//***************************** Local Constants ******************************** 
- #define DEBUG_PRINTS
+//******************************* Local Types **********************************
 
-//***************************** Local Variables ******************************** 
- 
-//****************************** Local Functions ******************************* 
+//***************************** Local Constants ********************************
+#define DEBUG_PRINTS
 
-//******************************.main.****************************************** 
+//***************************** Local Variables ********************************
+
+//****************************** Local Functions *******************************
+
+//******************************.main.******************************************
 //Purpose : main function.
 //Inputs  : None
 //Outputs : None
@@ -65,4 +65,4 @@ int main()
 
     return MainRet;
 }
-// EOF 
+//EOF

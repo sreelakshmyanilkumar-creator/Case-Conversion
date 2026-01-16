@@ -1,37 +1,38 @@
 //**************************** Case Conversion *********************************
 //  Copyright (c) 2026 Trenser Technology Solutions 
 //  All Rights Reserved 
-//****************************************************************************** 
-// 
+//******************************************************************************
+//
 // File        : ReadUserInput.c
 // Summary     : To read user input such as a string and the type of case 
 //               conversion
 // Note        : None
 // Author      : Sreelakshmy M.A.
 // Date        : 15/01/2026
-// 
-//****************************************************************************** 
- 
-//******************************* Include Files ******************************** 
+//
+//******************************************************************************
+
+//******************************* Include Files ********************************
  #include "ReadUserInput.h"
 
-//******************************* Local Types ********************************** 
- 
-//***************************** Local Constants ******************************** 
+//******************************* Local Types **********************************
 
-//***************************** Local Variables ******************************** 
- 
-//****************************** Local Functions ******************************* 
+//***************************** Local Constants ********************************
+
+//***************************** Local Variables ********************************
+
+//****************************** Local Functions *******************************
 
 //******************************.ReadUserInput.*********************************
-//Purpose : To get the user input like string and conversion type.
-//Inputs  : pucStringName - Character Pointer to get the input string from user
-//          pucUserChoice - Interger pointer to get choice of conversion from 
-//          user
-//Outputs : pucStringName - updated string after read input from user
-//          pucUserChoice - Updated integer after read input from user
-//Return  : Boolean value - for both input success return will be 1 else 0
-//Notes   : None
+//Purpose   : To get the user input like string and conversion type.
+//Inputs    : pucStringName - Character Pointer to get the input string from 
+//            user
+//            pucUserChoice - Interger pointer to get choice of conversion from 
+//            user
+//Outputs   : pucStringName - updated string after read input from user
+//            pucUserChoice - Updated integer after read input from user
+//Return    : Boolean value - for both input success return will be 1 else 0
+//Notes     : None
 //******************************************************************************
 
 bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
@@ -59,7 +60,7 @@ bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 
         if(scanf("%u", pucUserChoice) != true)
         {
-            printf("USER INPUTT = %hhd\n", *pucUserChoice);
+            printf("USER INPUT = %hhd\n", *pucUserChoice);
             ReadInputRet = false;
         }
     }
