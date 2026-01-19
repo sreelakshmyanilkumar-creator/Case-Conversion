@@ -39,6 +39,7 @@
 bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 {
     bool ReadInputRet = true;
+    size_t ReadStringLength;
 
     if(pucStringName == NULL || pucUserChoice == NULL)
     {
@@ -54,7 +55,7 @@ bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
             ReadInputRet = false;
         }
 
-        size_t ReadStringLength = strlen((char*)pucStringName); 
+        ReadStringLength = strlen((char*)pucStringName); 
         
         if (ReadStringLength > 0 && pucStringName[ReadStringLength-1] == '\n') 
         {

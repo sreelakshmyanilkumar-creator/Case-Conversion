@@ -27,7 +27,6 @@
 //***************************** Global Constants *******************************
 #define TRUE                   (1)
 #define FALSE                  (0)
-#define SCANF_TRUE             (2)
 
 //***************************** Global Variables *******************************
 
