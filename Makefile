@@ -3,11 +3,11 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 
 # Target executable
-TARGET = main
+TARGET = output/main
 
 # Source files
-SRCS = main.c read_user_input.c change_case.c
-OBJS = $(SRCS:.c=.o)
+SRCS = main.c ReadUserInput.c ChangeCase.c
+OBJS = $(patsubst %.c,output/%.o,$(SRCS))
 
 # Default rule
 all: $(TARGET)
@@ -17,9 +17,12 @@ $(TARGET) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 #compile each .c into .o
-%.o: %.c read_user_input.h change_case.h
+output/%.o: %.c ReadUserInput.h ChangeCase.h | output
 	$(CC) $(CFLAGS) -c $< -o $@
+
+output:
+	mkdir -p output
 
 #clean up
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf output
