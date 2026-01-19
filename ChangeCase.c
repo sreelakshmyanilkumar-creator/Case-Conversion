@@ -46,24 +46,24 @@ const CHANGE_CASE_HANDLER CaseHandler[] = {
 //*
 static bool ChangeToLower(uint8_t *pucStringName)
 {
-    bool ChangeLowerRet = true;
+    bool blChangeLowerRet = false;
 
-    if(pucStringName == NULL)
+    if(pucStringName != NULL)
     {
-        ChangeLowerRet = false;
-    }
-    
-    while (*pucStringName)
-    {
-        if(*pucStringName >= 'A' && *pucStringName <= 'Z') 
+        while (*pucStringName)
         {
-            *pucStringName = *pucStringName + ('a' - 'A');
+            if(*pucStringName >= 'A' && *pucStringName <= 'Z') 
+            {
+                *pucStringName = *pucStringName + ('a' - 'A');
+            }
+
+            pucStringName++;
         }
 
-        pucStringName++;
+        blChangeLowerRet = true;
     }
 
-    return ChangeLowerRet;
+    return blChangeLowerRet;
 }
 
 //******************************.ChangeToUpper.*********************************
@@ -76,23 +76,23 @@ static bool ChangeToLower(uint8_t *pucStringName)
 //*
 static bool ChangeToUpper(uint8_t *pucStringName)
 {
-    bool ChangeUpperRet = true;
+    bool blChangeUpperRet = false;
 
-    if(pucStringName == NULL)
+    if(pucStringName != NULL)
     {
-        ChangeUpperRet = false;
-    }
-    
-    while (*pucStringName)
-    {
-        if(*pucStringName >= 'a' && *pucStringName <= 'z') 
+        while (*pucStringName)
         {
-            *pucStringName = *pucStringName - ('a' - 'A');
+            if(*pucStringName >= 'a' && *pucStringName <= 'z') 
+            {
+                *pucStringName = *pucStringName - ('a' - 'A');
+            }
+            pucStringName++;
         }
-        pucStringName++;
+
+        blChangeUpperRet = true;
     }
 
-    return ChangeUpperRet;
+    return blChangeUpperRet;
 }
 
 //******************************.ChangeToCamel.*********************************
@@ -106,42 +106,43 @@ static bool ChangeToUpper(uint8_t *pucStringName)
 static bool ChangeToCamel(uint8_t *pucStringName)
 {
     bool ChangeCaseNewWord = true;
-    bool ChangeCamelRet = true;
+    bool blChangeCamelRet = false;
 
-    if(pucStringName == NULL)
+    if(pucStringName != NULL)
     {
-        ChangeCamelRet = false;
-    }
-
-    while(*pucStringName)
-    {
-        if(*pucStringName == ' ')
+        while(*pucStringName)
         {
-            ChangeCaseNewWord = true;
-        }
-        else
-        {
-            if(ChangeCaseNewWord)
+            if(*pucStringName == ' ')
             {
-                if(*pucStringName >= 'a' && *pucStringName <= 'z')
-                { 
-                    *pucStringName = *pucStringName - ('a' - 'A');
-                } 
-                ChangeCaseNewWord = false;
+                ChangeCaseNewWord = true;
             }
             else
             {
-                if(*pucStringName >= 'A' && *pucStringName <= 'Z')
+                if(ChangeCaseNewWord)
                 {
-                    *pucStringName = *pucStringName + ('a' - 'A');
+                    if(*pucStringName >= 'a' && *pucStringName <= 'z')
+                    { 
+                        *pucStringName = *pucStringName - ('a' - 'A');
+                    } 
+                    ChangeCaseNewWord = false;
+                }
+                else
+                {
+                    if(*pucStringName >= 'A' && *pucStringName <= 'Z')
+                    {
+                        *pucStringName = *pucStringName + ('a' - 'A');
+                    }
                 }
             }
+
+            pucStringName++;
         }
-        
-        pucStringName++;  
+
+        blChangeCamelRet = true;
+
     }
-    
-    return ChangeCamelRet;
+
+    return blChangeCamelRet;
 }
 
 //******************************.ChangeToHex.*********************************
@@ -155,25 +156,26 @@ static bool ChangeToCamel(uint8_t *pucStringName)
 //*
 static bool ChangeToHex(uint8_t *pucStringName)
 {
-    bool blChangeHexRet = true;
+    bool blChangeHexRet = false;
 
     uint8_t ChangeCaseHexBuffer[(READ_INPUT_STRING_SIZE * CHANGE_CASE_MULTPLR) +
          CHANGE_CASE_PREFIX_SIZE+CHANGE_CASE_NULL_CHARA_SIZE];
     uint8_t *ChangeCaseHexPtr = ChangeCaseHexBuffer;
     ChangeCaseHexPtr += sprintf((char*)ChangeCaseHexPtr, "0x");
 
-    if(pucStringName == NULL)
+    if(pucStringName != NULL)
     {
-        blChangeHexRet = false;
+        for(int i = 0; pucStringName[i] != '\0'; i++)
+        {
+            ChangeCaseHexPtr += sprintf((char*)ChangeCaseHexPtr, "%02X", 
+            pucStringName[i]);
+        }
+
+        blChangeHexRet = true;
     }
 
-    for(int i = 0; pucStringName[i] != '\0'; i++)
-    {
-        ChangeCaseHexPtr += sprintf((char*)ChangeCaseHexPtr, "%02X", pucStringName[i]);
-    }
-
-    strcpy((char*)pucStringName, (char*)ChangeCaseHexBuffer);
-    return blChangeHexRet;
+        strcpy((char*)pucStringName, (char*)ChangeCaseHexBuffer);
+        return blChangeHexRet;
 }
 
 //******************************.ChangeCase.************************************

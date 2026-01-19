@@ -38,45 +38,43 @@
 
 bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
 {
-    bool ReadInputRet = true;
+    bool blReadInputRet = false;
     size_t ReadStringLength;
 
     if(pucStringName == NULL || pucUserChoice == NULL)
     {
         printf("Pointer is NULL\n");
-        ReadInputRet = false;
     }
     else
     {
         printf("Enter the string to be converted\n");
 
-        if(fgets((char*)pucStringName, READ_INPUT_STRING_SIZE,stdin) == NULL)
+        if(fgets((char*)pucStringName, READ_INPUT_STRING_SIZE,stdin) != NULL)
         {
-            ReadInputRet = false;
-        }
-
-        ReadStringLength = strlen((char*)pucStringName); 
+            ReadStringLength = strlen((char*)pucStringName); 
         
-        if (ReadStringLength > 0 && pucStringName[ReadStringLength-1] == '\n') 
-        {
-            pucStringName[ReadStringLength-1] = '\0';
-        }
+            if (ReadStringLength > 0 && 
+                pucStringName[ReadStringLength-1] == '\n') 
+            {
+                pucStringName[ReadStringLength-1] = '\0';
+            }
 
-        printf("Enter the user choice of conversion\n");
+            printf("Enter the user choice of conversion\n");
 
-        for(int i = 0 ; i < READ_TOTAL_CASE_HANDLERS; i++)
-        {
-            printf("%d. %s\n", CaseHandler[i].ChangeCaseType, 
-                CaseHandler[i].ChangeCaseStringName);
-        }
+            for(int i = 0 ; i < READ_TOTAL_CASE_HANDLERS; i++)
+            {
+                printf("%d. %s\n", CaseHandler[i].ChangeCaseType, 
+                    CaseHandler[i].ChangeCaseStringName);
+            }
 
-        if(scanf("%u", pucUserChoice) != true)
-        {
-            printf("USER INPUT = %hhd\n", *pucUserChoice);
-            ReadInputRet = false;
+            if(scanf("%u", pucUserChoice) != false)
+            {
+                printf("USER INPUT = %hhd\n", *pucUserChoice);
+                blReadInputRet = true;
+            }
         }
     }
 
-    return ReadInputRet;
+    return blReadInputRet;
 }
 //EOF

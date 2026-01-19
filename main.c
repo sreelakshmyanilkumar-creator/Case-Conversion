@@ -35,33 +35,29 @@ int main()
 {
     uint8_t pucStringName[READ_INPUT_STRING_SIZE] = {0};
     CHANGE_CASE_TYPE pucUserChoice = 0;
-    bool MainRet = EXIT_SUCCESS;
+    bool blRet = EXIT_FAILURE;
 
-    if(ReadUserInput(pucStringName, &pucUserChoice) == false)
+    if(ReadUserInput(pucStringName, &pucUserChoice) != false)
     {
-        printf("Invalid read input from user\n");
-        MainRet = EXIT_FAILURE;
-    }
-    else
-    {
+        printf("Read from User Successfull\n");
+
         #ifdef DEBUG_PRINTS
         printf("%s\n", pucStringName);
         printf("%d\n", pucUserChoice);
         #endif
 
-        if(ChangeCase(pucStringName, &pucUserChoice) != true)
+        if(ChangeCase(pucStringName, &pucUserChoice) != false)
         {
-            printf("Invalid case conversion\n");
-            MainRet = EXIT_FAILURE;
-        }
-        else
-        {
+            printf("Case Conversion Successfull\n");
+
             #ifdef DEBUG_PRINTS
             printf("%s\n", pucStringName);
             #endif
+
+            blRet = EXIT_SUCCESS;
         }
     }
 
-    return MainRet;
+    return blRet;
 }
 //EOF
