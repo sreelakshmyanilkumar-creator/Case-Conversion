@@ -25,7 +25,6 @@
 //******************************* Global Types *********************************
 
 //***************************** Global Constants *******************************
-#define READ_INPUT_STRING_SIZE (20)
 #define TRUE                   (1)
 #define FALSE                  (0)
 #define SCANF_TRUE             (2)

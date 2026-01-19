@@ -18,17 +18,22 @@
 //******************************* Local Types **********************************
 
 //***************************** Local Constants ********************************
+#define CHANGE_CASE_MULTPLR         (2)
+#define CHANGE_CASE_PREFIX_SIZE     (2)
+#define CHANGE_CASE_NULL_CHARA_SIZE (1)
 
 //****************************** Local Functions *******************************
 static bool ChangeToLower(uint8_t *pucStringName);
 static bool ChangeToUpper(uint8_t *pucStringName);
 static bool ChangeToCamel(uint8_t *pucStringName);
+static bool ChangeToHex(uint8_t *pucStringName);
 
 //***************************** Local Variables ********************************
- CHANGE_CASE_HANDLER CaseHandler[] = {
-    {CHANGE_CASE_LOWER, ChangeToLower},
-    {CHANGE_CASE_UPPER, ChangeToUpper},
-    {CHANGE_CASE_CAMEL, ChangeToCamel}
+const CHANGE_CASE_HANDLER CaseHandler[] = {
+    {CHANGE_CASE_LOWER, "Lower Case", ChangeToLower},
+    {CHANGE_CASE_UPPER, "Upper Case", ChangeToUpper},
+    {CHANGE_CASE_CAMEL, "Camel Case", ChangeToCamel},
+    {CHANGE_CASE_HEX, "Hex", ChangeToHex}
  };
 
 //******************************.ChangeToLower.*********************************
@@ -139,6 +144,38 @@ static bool ChangeToCamel(uint8_t *pucStringName)
     return ChangeCamelRet;
 }
 
+//******************************.ChangeToHex.*********************************
+//Purpose   : To convert to hex.
+//Inputs    : pucStringName - Character Pointer to get the input string from 
+//            user
+//Outputs   : pucStringName - updated string after conversion
+//Return    : Boolean value - for both input success return will be true else 
+//            false
+//Notes     : None
+//*
+static bool ChangeToHex(uint8_t *pucStringName)
+{
+    bool blChangeHexRet = true;
+
+    uint8_t ChangeCaseHexBuffer[(READ_INPUT_STRING_SIZE * CHANGE_CASE_MULTPLR) +
+         CHANGE_CASE_PREFIX_SIZE+CHANGE_CASE_NULL_CHARA_SIZE];
+    uint8_t *ChangeCaseHexPtr = ChangeCaseHexBuffer;
+    ChangeCaseHexPtr += sprintf((char*)ChangeCaseHexPtr, "0x");
+
+    if(pucStringName == NULL)
+    {
+        blChangeHexRet = false;
+    }
+
+    for(int i = 0; pucStringName[i] != '\0'; i++)
+    {
+        ChangeCaseHexPtr += sprintf((char*)ChangeCaseHexPtr, "%02X", pucStringName[i]);
+    }
+
+    strcpy((char*)pucStringName, (char*)ChangeCaseHexBuffer);
+    return blChangeHexRet;
+}
+
 //******************************.ChangeCase.************************************
 //Purpose : To change the case conversion.
 //Inputs  : pucStringName - Character Pointer to get the input string from user
@@ -167,6 +204,7 @@ bool ChangeCase(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
                 ChangeCaseRet = CaseHandler[count].func(pucStringName);
             }
         }
+
     }
 
     return ChangeCaseRet;

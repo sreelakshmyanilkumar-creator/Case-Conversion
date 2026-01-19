@@ -13,7 +13,8 @@
 //******************************************************************************
 
 //******************************* Include Files ********************************
- #include "ReadUserInput.h"
+#include "ReadUserInput.h"
+#include "ChangeCase.h"
 
 //******************************* Local Types **********************************
 
@@ -53,10 +54,20 @@ bool ReadUserInput(uint8_t *pucStringName, CHANGE_CASE_TYPE *pucUserChoice)
             ReadInputRet = false;
         }
 
+        size_t ReadStringLength = strlen((char*)pucStringName); 
+        
+        if (ReadStringLength > 0 && pucStringName[ReadStringLength-1] == '\n') 
+        {
+            pucStringName[ReadStringLength-1] = '\0';
+        }
+
         printf("Enter the user choice of conversion\n");
-        printf("1. To Lower Case\n");
-        printf("2. To Upper Case\n");
-        printf("3. To Camel Case\n");
+
+        for(int i = 0 ; i < READ_TOTAL_CASE_HANDLERS; i++)
+        {
+            printf("%d. %s\n", CaseHandler[i].ChangeCaseType, 
+                CaseHandler[i].ChangeCaseStringName);
+        }
 
         if(scanf("%u", pucUserChoice) != true)
         {

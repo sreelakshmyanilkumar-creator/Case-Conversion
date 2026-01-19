@@ -14,7 +14,6 @@
 //******************************* Include Files ********************************
 #include <stdlib.h>
 #include "ReadUserInput.h"
-#include "ChangeCase.h"
 
 //******************************* Local Types **********************************
 
